@@ -24,6 +24,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>TJRoutesSchemes</string>
+				<string>TJRoutesGlobal</string>
 			</array>
 		</dict>
 	</array>

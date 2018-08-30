@@ -18,6 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"abcId"];
+    //globalRoutes
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,7 +45,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableView xqui_clearsSelection];
     NSLog(@"调转链接%@",TJPushRouteURL(@"TJNextController"));
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:TJPushRouteURL(@"TJNextController")]];
+//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:TJPushRouteURL(@"TJNextController")]];
+
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"TJRoutesGlobal://user/view/123"]];
+
 }
 
 

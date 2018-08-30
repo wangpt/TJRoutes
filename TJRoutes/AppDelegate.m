@@ -57,13 +57,29 @@
 #pragma mark - 路由拦截
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options{
-    return [JLRoutes routeURL:url];
+//    NSString *str = url.absoluteString;
+//    NSArray *arr = [str componentsSeparatedByString:@"://"];
+//
+//    if ([[arr.firstObject lowercaseString] isEqualToString:@"routeone"]) {
+//
+//        return [[JLRoutes routesForScheme:@"RouteOne"]routeURL:url];
+//
+//    }else{
+        return [JLRoutes routeURL:url];
+
+//    }
 
 }
 
 #pragma mark - 普通的跳转路由注册
 - (void)registerNavgationRouter
 {
+    //传递参数
+    [[JLRoutes globalRoutes] addRoute:@"/user/view/:userID" handler:^BOOL(NSDictionary *parameters) {
+        NSString *userID = parameters[@"userID"];
+        NSLog(@"%@",userID);
+        return YES;
+    }];
     // push
     // 路由 /TJPushRoute/:controller
     [[JLRoutes globalRoutes] addRoute:TJPushRoute handler:^BOOL(NSDictionary<NSString *,id> * _Nonnull parameters) {
@@ -96,13 +112,30 @@
         return YES;
     }];
 }
-
-
+#pragma mark - Schema 匹配
+// routesForScheme 的优先级最高
+- (void)registerSchemaRouter
+{
+    // HTTP注册
+    NSLog(@"%@",@"");
+//    [[JLRoutes routesForScheme:@""] addRoute:TJPushRoute handler:^BOOL(NSDictionary<NSString *,id> * _Nonnull parameters) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            UIViewController *currentVc = [self currentViewController];
+//            UIViewController *v = [[NSClassFromString(parameters[@"controller"]) alloc] init];
+//            [self paramToVc:v param:parameters];
+//            [currentVc.navigationController pushViewController:v animated:YES];
+//        });
+//        return YES;
+//    }];
+}
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = [TJTabBarController new];
+    
+
     [self registerNavgationRouter];
+    [self registerSchemaRouter];
     return YES;
 }
 
