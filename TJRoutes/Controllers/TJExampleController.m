@@ -9,6 +9,9 @@
 #import "TJExampleController.h"
 #import "UITableView+XQUI.h"
 #import "TJRouterConstHeader.h"
+#import "JLRoutes.h"
+
+static NSString * const kTJCellReuseIdentifier = @"kTJCellReuseIdentifier";
 @interface TJExampleController ()
 
 @end
@@ -17,8 +20,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"abcId"];
-    //globalRoutes
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,23 +34,35 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return self.examples.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"abcId" forIndexPath:indexPath];
-    cell.textLabel.text = @"push";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kTJCellReuseIdentifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kTJCellReuseIdentifier];
+    }
+    TJExample *example = self.examples[indexPath.row];
+    cell.textLabel.text = example.title;
+    cell.detailTextLabel.text =example.routeURL;
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableView xqui_clearsSelection];
-    NSLog(@"调转链接%@",TJPushRouteURL(@"TJNextController"));
-//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:TJPushRouteURL(@"TJNextController")]];
-
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"TJRoutesGlobal://user/view/123"]];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    TJExample *example = self.examples[indexPath.row];
+    [self performSelector:example.selector withObject:example.routeURL];
+#pragma clang diagnostic pop
 
 }
+- (void)globalExample:(NSString *)path{
+    //    NSLog(@"调转链接%@",path);
+    [JLRoutes routeURL:[NSURL URLWithString:path]];
+    //等同于[[UIApplication sharedApplication] openURL:[NSURL URLWithString:path]];
 
+    
+}
 
 @end

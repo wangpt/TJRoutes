@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 
 ///需配置schemes
-#define TJSCHEMA_ROUTE @"TJRoutesSchemes"
+#define TJSCHEMA_ROUTE @"TJRoutesGlobal"
 #pragma mark - 路由表
 
 /// 导航栏 Push

@@ -74,13 +74,16 @@
 #pragma mark - 普通的跳转路由注册
 - (void)registerNavgationRouter
 {
-    //传递参数
-    [[JLRoutes globalRoutes] addRoute:@"/user/view/:userID" handler:^BOOL(NSDictionary *parameters) {
+    //log
+    [JLRoutes setVerboseLoggingEnabled:NO];
+    // 1.global  多路径
+    JLRoutes.globalRoutes[@"/user/view/:userID"] = ^BOOL(NSDictionary *parameters) {
         NSString *userID = parameters[@"userID"];
         NSLog(@"%@",userID);
         return YES;
-    }];
-    // push
+    };
+    
+    // 2.push
     // 路由 /TJPushRoute/:controller
     [[JLRoutes globalRoutes] addRoute:TJPushRoute handler:^BOOL(NSDictionary<NSString *,id> * _Nonnull parameters) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -91,7 +94,7 @@
         });
         return YES;
     }];
-    // present
+    // 3.present
     [[JLRoutes globalRoutes] addRoute:TJPresentRoute handler:^BOOL(NSDictionary<NSString *,id> * _Nonnull parameters) {
         dispatch_async(dispatch_get_main_queue(), ^{
             UIViewController *currentVc = [self currentViewController];
@@ -102,7 +105,7 @@
         });
         return YES;
     }];
-    // sb push
+    // 4.sb push
     [[JLRoutes globalRoutes] addRoute:TJStoryBoardPushRoute handler:^BOOL(NSDictionary<NSString *,id> * _Nonnull parameters) {
         UIViewController *currentVc = [self currentViewController];
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:parameters[@"sbname"] bundle:nil];
@@ -111,6 +114,7 @@
         [currentVc.navigationController pushViewController:v animated:YES];
         return YES;
     }];
+    // 5.More Complex Example
 }
 #pragma mark - Schema 匹配
 // routesForScheme 的优先级最高
@@ -133,7 +137,6 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = [TJTabBarController new];
     
-
     [self registerNavgationRouter];
     [self registerSchemaRouter];
     return YES;

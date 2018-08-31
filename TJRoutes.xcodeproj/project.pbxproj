@@ -14,8 +14,9 @@
 		2B0A697021368E760045C1AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B0A696E21368E760045C1AB /* LaunchScreen.storyboard */; };
 		2B0A697321368E760045C1AB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B0A697221368E760045C1AB /* main.m */; };
 		2B0A697B213696830045C1AB /* TJRouterConstHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B0A697A213696830045C1AB /* TJRouterConstHeader.m */; };
+		2B1E1428213975B200D07552 /* TJSourceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E1427213975B200D07552 /* TJSourceController.m */; };
+		2B1E142B213983FA00D07552 /* TJDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E142A213983FA00D07552 /* TJDetailController.m */; };
 		2BE57E702137856A00C9FB0C /* TJExampleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE57E6F2137856A00C9FB0C /* TJExampleController.m */; };
-		2BE57E76213786C800C9FB0C /* TJNextController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE57E75213786C800C9FB0C /* TJNextController.m */; };
 		2BE57E7C2137870A00C9FB0C /* TJDemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE57E7B2137870A00C9FB0C /* TJDemoController.m */; };
 		2BE57E7F213787B900C9FB0C /* TJNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE57E7E213787B900C9FB0C /* TJNavigationController.m */; };
 		2BE57E832137B86D00C9FB0C /* TJTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE57E822137B86D00C9FB0C /* TJTabBarController.m */; };
@@ -34,10 +35,12 @@
 		2B0A697221368E760045C1AB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2B0A6979213696830045C1AB /* TJRouterConstHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TJRouterConstHeader.h; sourceTree = "<group>"; };
 		2B0A697A213696830045C1AB /* TJRouterConstHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TJRouterConstHeader.m; sourceTree = "<group>"; };
+		2B1E1426213975B200D07552 /* TJSourceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TJSourceController.h; sourceTree = "<group>"; };
+		2B1E1427213975B200D07552 /* TJSourceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TJSourceController.m; sourceTree = "<group>"; };
+		2B1E1429213983FA00D07552 /* TJDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TJDetailController.h; sourceTree = "<group>"; };
+		2B1E142A213983FA00D07552 /* TJDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TJDetailController.m; sourceTree = "<group>"; };
 		2BE57E6E2137856A00C9FB0C /* TJExampleController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TJExampleController.h; sourceTree = "<group>"; };
 		2BE57E6F2137856A00C9FB0C /* TJExampleController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TJExampleController.m; sourceTree = "<group>"; };
-		2BE57E74213786C800C9FB0C /* TJNextController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TJNextController.h; sourceTree = "<group>"; };
-		2BE57E75213786C800C9FB0C /* TJNextController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TJNextController.m; sourceTree = "<group>"; };
 		2BE57E7A2137870A00C9FB0C /* TJDemoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TJDemoController.h; sourceTree = "<group>"; };
 		2BE57E7B2137870A00C9FB0C /* TJDemoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TJDemoController.m; sourceTree = "<group>"; };
 		2BE57E7D213787B900C9FB0C /* TJNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TJNavigationController.h; sourceTree = "<group>"; };
@@ -99,16 +102,18 @@
 		2BE57E6D213784CE00C9FB0C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				2BE57E74213786C800C9FB0C /* TJNextController.h */,
-				2BE57E75213786C800C9FB0C /* TJNextController.m */,
-				2BE57E6E2137856A00C9FB0C /* TJExampleController.h */,
-				2BE57E6F2137856A00C9FB0C /* TJExampleController.m */,
 				2BE57E7D213787B900C9FB0C /* TJNavigationController.h */,
 				2BE57E7E213787B900C9FB0C /* TJNavigationController.m */,
 				2BE57E7A2137870A00C9FB0C /* TJDemoController.h */,
 				2BE57E7B2137870A00C9FB0C /* TJDemoController.m */,
 				2BE57E812137B86D00C9FB0C /* TJTabBarController.h */,
 				2BE57E822137B86D00C9FB0C /* TJTabBarController.m */,
+				2B1E1426213975B200D07552 /* TJSourceController.h */,
+				2B1E1427213975B200D07552 /* TJSourceController.m */,
+				2BE57E6E2137856A00C9FB0C /* TJExampleController.h */,
+				2BE57E6F2137856A00C9FB0C /* TJExampleController.m */,
+				2B1E1429213983FA00D07552 /* TJDetailController.h */,
+				2B1E142A213983FA00D07552 /* TJDetailController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -235,11 +240,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B0A697321368E760045C1AB /* main.m in Sources */,
-				2BE57E76213786C800C9FB0C /* TJNextController.m in Sources */,
 				2BE57E702137856A00C9FB0C /* TJExampleController.m in Sources */,
+				2B1E142B213983FA00D07552 /* TJDetailController.m in Sources */,
 				2BE57E7C2137870A00C9FB0C /* TJDemoController.m in Sources */,
 				2B0A696521368E750045C1AB /* AppDelegate.m in Sources */,
 				2BE57E832137B86D00C9FB0C /* TJTabBarController.m in Sources */,
+				2B1E1428213975B200D07552 /* TJSourceController.m in Sources */,
 				2BE57E7F213787B900C9FB0C /* TJNavigationController.m in Sources */,
 				2BE57E952137CA7A00C9FB0C /* UITableView+XQUI.m in Sources */,
 				2B0A697B213696830045C1AB /* TJRouterConstHeader.m in Sources */,

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface TJExampleController : UITableViewController
+#import "TJSourceController.h"
+@interface TJExampleController : TJSourceController
 
 @end
