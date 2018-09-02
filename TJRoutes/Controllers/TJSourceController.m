@@ -34,6 +34,7 @@
                                          routeURL:@"TJRoutesGlobal://user/view/123"
                                          //等同于TJRouteURLBase(@"user/view/123")
                                      routePattern:@""],
+               
                       [TJExample exampleWithTitle:@"Push"
                                          selector:@"globalExample:"
                                          routeURL:TJPushRouteURL(@"TJDetailController")
@@ -41,6 +42,10 @@
                       [TJExample exampleWithTitle:@"Present"
                                          selector:@"globalExample:"
                                          routeURL:TJPresentRouteURL(@"TJDetailController")
+                                     routePattern:@""],
+                      [TJExample exampleWithTitle:@"Complex"
+                                         selector:@"globalExample:"
+                                         routeURL:@"TJRoutesComplex://post/edit/123?debug=true&foo=bar"
                                      routePattern:@""],
                       ];
  

@@ -82,6 +82,7 @@
         NSLog(@"%@",userID);
         return YES;
     };
+
     
     // 2.push
     // 路由 /TJPushRoute/:controller
@@ -114,7 +115,14 @@
         [currentVc.navigationController pushViewController:v animated:YES];
         return YES;
     }];
-    // 5.More Complex Example
+    // 5.多参数
+    [[JLRoutes globalRoutes] addRoute:@"/:object/:action/:primaryKey" handler:^BOOL(NSDictionary *parameters) {
+        NSString *object = parameters[@"object"];
+        NSString *action = parameters[@"action"];
+        NSString *primaryKey = parameters[@"primaryKey"];
+        NSLog(@"%@_%@_%@",object,action,primaryKey);
+        return YES;
+    }];
 }
 #pragma mark - Schema 匹配
 // routesForScheme 的优先级最高
