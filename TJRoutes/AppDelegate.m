@@ -54,8 +54,7 @@
     }
 }
 
-#pragma mark - 路由拦截
-
+#pragma mark - URL拦截
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options{
     NSString *str = url.absoluteString;
     NSArray *arr = [str componentsSeparatedByString:@"://"];
@@ -147,9 +146,6 @@
         return YES;
     }];
     
-
-    
-    
 }
 #pragma mark - wildcards 匹配
 - (void)registerWildcardsRouter{
@@ -170,7 +166,7 @@
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = [TJTabBarController new];
-    
+    //注册
     [self registerNavgationRouter];
     [self registerSchemaRouter];
     [self registerWildcardsRouter];
