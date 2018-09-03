@@ -23,7 +23,9 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>TJRoutesSchemes</string>
+				<string>TJRoutesWildcards</string>
+				<string>TJRoutesSchemesThing</string>
+				<string>TJRoutesSchemesStuff</string>
 				<string>TJRoutesComplex</string>
 				<string>TJRoutesGlobal</string>
 			</array>

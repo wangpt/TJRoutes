@@ -60,15 +60,15 @@ static NSString * const kTJCellReuseIdentifier = @"kTJCellReuseIdentifier";
 - (void)globalExample:(NSString *)path{
     //    NSLog(@"调转链接%@",path);
     [JLRoutes routeURL:[NSURL URLWithString:path]];
-    //等同于[[UIApplication sharedApplication] openURL:[NSURL URLWithString:path]];
-
-    
 }
-- (void)globalExample2:(NSString *)path{
+- (void)schemesExample:(NSString *)path{
     //    NSLog(@"调转链接%@",path);
-    [JLRoutes routeURL:[NSURL URLWithString:path]];
-    //等同于[[UIApplication sharedApplication] openURL:[NSURL URLWithString:path]];
-    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:path]];
     
 }
+- (void)wildcardsExample:(NSString *)path{
+    //    NSLog(@"调转链接%@",path);
+    [self globalExample:path];
+}
+
 @end

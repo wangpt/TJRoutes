@@ -34,7 +34,6 @@
                                          routeURL:@"TJRoutesGlobal://user/view/123"
                                          //等同于TJRouteURLBase(@"user/view/123")
                                      routePattern:@""],
-               
                       [TJExample exampleWithTitle:@"Push"
                                          selector:@"globalExample:"
                                          routeURL:TJPushRouteURL(@"TJDetailController")
@@ -47,7 +46,27 @@
                                          selector:@"globalExample:"
                                          routeURL:@"TJRoutesComplex://post/edit/123?debug=true&foo=bar"
                                      routePattern:@""],
+                      
+                      [TJExample exampleWithTitle:@"Schemes1"
+                                         selector:@"schemesExample:"
+                                         routeURL:@"TJRoutesSchemesThing://foo/view/456"
+                                     routePattern:@""],
+                      [TJExample exampleWithTitle:@"Schemes2"
+                                         selector:@"schemesExample:"
+                                         routeURL:@"TJRoutesSchemesStuff://foo/view?user=789"
+                                     routePattern:@""],
+                      [TJExample exampleWithTitle:@"Schemes3"
+                                         selector:@"schemesExample:"
+                                         routeURL:@"TJRoutesSchemesThing://foo/view2"
+                                     routePattern:@""],
+                      
+                      [TJExample exampleWithTitle:@"Wildcards"
+                                         selector:@"wildcardsExample:"
+                                         routeURL:@"TJRoutesWildcards://wildcard/joker?user=111"
+                                     routePattern:@""],
+                      
                       ];
+    
  
 }
 

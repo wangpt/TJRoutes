@@ -7,10 +7,10 @@
 //
 
 #import "AppDelegate.h"
-#import "TJRouterConstHeader.h"
 #import "JLRoutes.h"
 #import "TJTabBarController.h"
 #import <objc/runtime.h>
+#import "TJRouterConstHeader.h"
 
 @interface AppDelegate ()
 
@@ -57,17 +57,16 @@
 #pragma mark - 路由拦截
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options{
-//    NSString *str = url.absoluteString;
-//    NSArray *arr = [str componentsSeparatedByString:@"://"];
-//
-//    if ([[arr.firstObject lowercaseString] isEqualToString:@"routeone"]) {
-//
-//        return [[JLRoutes routesForScheme:@"RouteOne"]routeURL:url];
-//
-//    }else{
-        return [JLRoutes routeURL:url];
-
-//    }
+    NSString *str = url.absoluteString;
+    NSArray *arr = [str componentsSeparatedByString:@"://"];
+    if ([[arr.firstObject lowercaseString] isEqualToString:@"tjroutesschemesthing"]) {
+        return [[JLRoutes routesForScheme:@"TJRoutesSchemesThing"]routeURL:url];
+    }else if ([[arr.firstObject lowercaseString] isEqualToString:@"tjroutesschemesstuff"]){
+        return [[JLRoutes routesForScheme:@"TJRoutesSchemesStuff"]routeURL:url];
+    }
+    else{
+        return NO;
+    }
 
 }
 
@@ -82,8 +81,6 @@
         NSLog(@"%@",userID);
         return YES;
     };
-
-    
     // 2.push
     // 路由 /TJPushRoute/:controller
     [[JLRoutes globalRoutes] addRoute:TJPushRoute handler:^BOOL(NSDictionary<NSString *,id> * _Nonnull parameters) {
@@ -115,7 +112,7 @@
         [currentVc.navigationController pushViewController:v animated:YES];
         return YES;
     }];
-    // 5.多参数
+    // 5.complex
     [[JLRoutes globalRoutes] addRoute:@"/:object/:action/:primaryKey" handler:^BOOL(NSDictionary *parameters) {
         NSString *object = parameters[@"object"];
         NSString *action = parameters[@"action"];
@@ -125,21 +122,50 @@
     }];
 }
 #pragma mark - Schema 匹配
-// routesForScheme 的优先级最高
+// routesForScheme 的优先级最高 (注册固定的schemes，则不通知全局的监测)
 - (void)registerSchemaRouter
 {
-    // HTTP注册
-    NSLog(@"%@",@"");
-//    [[JLRoutes routesForScheme:@""] addRoute:TJPushRoute handler:^BOOL(NSDictionary<NSString *,id> * _Nonnull parameters) {
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            UIViewController *currentVc = [self currentViewController];
-//            UIViewController *v = [[NSClassFromString(parameters[@"controller"]) alloc] init];
-//            [self paramToVc:v param:parameters];
-//            [currentVc.navigationController pushViewController:v animated:YES];
-//        });
-//        return YES;
-//    }];
+
+    [[JLRoutes routesForScheme:@"TJRoutesSchemesThing"] addRoute:@"/foo/view/:user" handler:^BOOL(NSDictionary<NSString *,id> * _Nonnull parameters) {
+        NSLog(@"%@",parameters[@"user"]);
+        return YES;
+    }];
+    [[JLRoutes routesForScheme:@"TJRoutesSchemesStuff"] addRoute:@"/foo/view" handler:^BOOL(NSDictionary<NSString *,id> * _Nonnull parameters) {
+        NSLog(@"%@",parameters[@"user"]);
+        return YES;
+    }];
+/*
+    //当这个scheme找不到该路径时,shouldFallbackToGlobalRoutes决定是否进行全局匹配，true为进行再进行全局搜索
+    [[JLRoutes routesForScheme:@"TJRoutesSchemesThing"] addRoute:@"/foo/view2" handler:^BOOL(NSDictionary<NSString *,id> * _Nonnull parameters) {
+        NSLog(@"%@",parameters[@"user"]);
+        return YES;
+    }];
+ */
+    [JLRoutes routesForScheme:@"TJRoutesSchemesThing"].shouldFallbackToGlobalRoutes = YES;
+    [[JLRoutes globalRoutes] addRoute:@"/foo/view2" handler:^BOOL(NSDictionary *parameters) {
+        NSLog(@"TJRoutesSchemesThing");
+        return YES;
+    }];
+    
+
+    
+    
 }
+#pragma mark - wildcards 匹配
+- (void)registerWildcardsRouter{
+    [[JLRoutes globalRoutes] addRoute:@"/wildcard/*" handler:^BOOL(NSDictionary *parameters) {
+        NSArray *pathComponents = parameters[JLRouteWildcardComponentsKey];
+        if (pathComponents.count > 0 && [pathComponents[0] isEqualToString:@"joker"]) {
+            // 返回路线匹配;
+            NSLog(@"%@",parameters[@"user"]);
+            return YES;
+        }
+        // 返回路线不匹配
+        return NO;
+    }];
+    
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -147,6 +173,7 @@
     
     [self registerNavgationRouter];
     [self registerSchemaRouter];
+    [self registerWildcardsRouter];
     return YES;
 }
 
