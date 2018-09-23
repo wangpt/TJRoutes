@@ -36,7 +36,7 @@
                                      routePattern:@""],
                       [TJExample exampleWithTitle:@"Push"
                                          selector:@"globalExample:"
-                                         routeURL:TJPushRouteURL(@"TJDetailController")
+                                         routeURL:TJPushRouteURL(@"TJDetailController?url=baidu")
                                      routePattern:@""],
                       [TJExample exampleWithTitle:@"Present"
                                          selector:@"globalExample:"

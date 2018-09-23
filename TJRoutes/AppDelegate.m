@@ -19,19 +19,23 @@
 
 @implementation AppDelegate
 
--(void)paramToVc:(UIViewController *) v param:(NSDictionary<NSString *,NSString *> *)parameters{
-    //        runtime将参数传递至需要跳转的控制器
-    unsigned int outCount = 0;
-    objc_property_t * properties = class_copyPropertyList(v.class , &outCount);
-    for (int i = 0; i < outCount; i++) {
-        objc_property_t property = properties[i];
-        NSString *key = [NSString stringWithUTF8String:property_getName(property)];
-        NSString *param = parameters[key];
-        if (param != nil) {
-            [v setValue:param forKey:key];
+
+- (void)remoteNotificationDictionary:(NSDictionary *)dict {
+    // 根据字典字段反射出我们想要的类，并初始化控制器
+    Class class = NSClassFromString(dict[@"className"]);
+    UIViewController *vc = [[class alloc] init];
+    // 获取参数列表，使用枚举的方式，对控制器属性进行KVC赋值
+    NSDictionary *parameter = dict[@"propertys"];
+    [parameter enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        // 在属性赋值时，做容错处理，防止因为后台数据导致的异常
+        if ([vc respondsToSelector:NSSelectorFromString(key)]) {
+            [vc setValue:obj forKey:key];
         }
-    }
+    }];
 }
+
+
+
 
 #pragma mark - URL拦截
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options{
@@ -65,7 +69,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             UIViewController *currentVc = [self.window.rootViewController tj_topViewController];
             UIViewController *v = [[NSClassFromString(parameters[@"controller"]) alloc] init];
-            [self paramToVc:v param:parameters];
+            [v tj_reflectDataFromNotificationParameters:parameters];
             [currentVc.navigationController pushViewController:v animated:YES];
         });
         return YES;
@@ -75,7 +79,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             UIViewController *currentVc = [self.window.rootViewController tj_topViewController];
             UIViewController *v = [[NSClassFromString(parameters[@"controller"]) alloc] init];
-            [self paramToVc:v param:parameters];
+            [v tj_reflectDataFromNotificationParameters:parameters];
             [currentVc.navigationController presentViewController:v animated:YES completion:nil];
 
         });
@@ -86,7 +90,7 @@
         UIViewController *currentVc = [self.window.rootViewController tj_topViewController];
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:parameters[@"sbname"] bundle:nil];
         UIViewController *v  = [storyboard instantiateViewControllerWithIdentifier:parameters[@"bundleid"]];
-        [self paramToVc:v param:parameters];
+        [v tj_reflectDataFromNotificationParameters:parameters];
         [currentVc.navigationController pushViewController:v animated:YES];
         return YES;
     }];

@@ -7,6 +7,7 @@
 //
 
 #import "UIViewController+TJHelper.h"
+#import <objc/runtime.h>
 
 @implementation UIViewController (TJHelper)
 - (UIViewController *)tj_topViewController {
@@ -36,4 +37,18 @@
 - (BOOL)tj_isVisible {
     return [self isViewLoaded] && self.view.window;
 }
+
+- (void)tj_reflectDataFromNotificationParameters:(NSDictionary *)parameters{
+    unsigned int outCount = 0;
+    objc_property_t * properties = class_copyPropertyList(self.class , &outCount);
+    for (int i = 0; i < outCount; i++) {
+        objc_property_t property = properties[i];
+        NSString *propertyName = [NSString stringWithUTF8String:property_getName(property)];
+        NSString *propertyValue = parameters[propertyName];
+        if (propertyValue != nil) {
+            [self setValue:propertyValue forKey:propertyName];
+        }
+    }
+}
+
 @end

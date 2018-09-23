@@ -37,6 +37,7 @@
     [self.view addSubview:dissmissLabel];
     dissmissLabel.text = @"go back";
     dissmissLabel.textAlignment = NSTextAlignmentCenter;
+    NSLog(@"url:%@",self.url);
 }
 
 - (void)didReceiveMemoryWarning {
