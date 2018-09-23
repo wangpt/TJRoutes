@@ -58,7 +58,7 @@ static NSString * const kTJCellReuseIdentifier = @"kTJCellReuseIdentifier";
 
 }
 - (void)globalExample:(NSString *)path{
-    //    NSLog(@"调转链接%@",path);
+    //    NSLog(@"调转链接%@",path);path = TJPushRouteURL(@"TJDetailController?url=baidu")
     [JLRoutes routeURL:[NSURL URLWithString:path]];
 }
 - (void)schemesExample:(NSString *)path{

@@ -6,6 +6,7 @@
 //  Copyright © 2018年 tao. All rights reserved.
 //
 #import <Foundation/Foundation.h>
+#import "JLRoutes.h"
 
 ///需配置schemes
 #define TJSCHEMA_ROUTE @"TJRoutesGlobal"

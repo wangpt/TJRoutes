@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "JLRoutes.h"
 #import "UIViewController+TJHelper.h"
 #import "TJTabBarController.h"
 #import <objc/runtime.h>
