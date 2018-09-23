@@ -12,35 +12,13 @@
 #import "TJTabBarController.h"
 #import <objc/runtime.h>
 #import "TJRouterConstHeader.h"
-
+#import "UIViewController+TJHelper.h"
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
-#pragma mark - helper
-/// 获取当前控制器
-- (UIViewController *)currentViewController{
-    
-    UIViewController * currVC = nil;
-    UIViewController * Rootvc = self.window.rootViewController ;
-    do {
-        if ([Rootvc isKindOfClass:[UINavigationController class]]) {
-            UINavigationController * nav = (UINavigationController *)Rootvc;
-            UIViewController * v = [nav.viewControllers lastObject];
-            currVC = v;
-            Rootvc = v.presentedViewController;
-            continue;
-        }else if([Rootvc isKindOfClass:[UITabBarController class]]){
-            UITabBarController * tabVC = (UITabBarController *)Rootvc;
-            currVC = tabVC;
-            Rootvc = [tabVC.viewControllers objectAtIndex:tabVC.selectedIndex];
-            continue;
-        }
-    } while (Rootvc!=nil);
-    
-    return currVC;
-}
+
 -(void)paramToVc:(UIViewController *) v param:(NSDictionary<NSString *,NSString *> *)parameters{
     //        runtime将参数传递至需要跳转的控制器
     unsigned int outCount = 0;
@@ -85,7 +63,7 @@
     // 路由 /TJPushRoute/:controller
     [[JLRoutes globalRoutes] addRoute:TJPushRoute handler:^BOOL(NSDictionary<NSString *,id> * _Nonnull parameters) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            UIViewController *currentVc = [self currentViewController];
+            UIViewController *currentVc = [self.window.rootViewController tj_topViewController];
             UIViewController *v = [[NSClassFromString(parameters[@"controller"]) alloc] init];
             [self paramToVc:v param:parameters];
             [currentVc.navigationController pushViewController:v animated:YES];
@@ -95,7 +73,7 @@
     // 3.present
     [[JLRoutes globalRoutes] addRoute:TJPresentRoute handler:^BOOL(NSDictionary<NSString *,id> * _Nonnull parameters) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            UIViewController *currentVc = [self currentViewController];
+            UIViewController *currentVc = [self.window.rootViewController tj_topViewController];
             UIViewController *v = [[NSClassFromString(parameters[@"controller"]) alloc] init];
             [self paramToVc:v param:parameters];
             [currentVc.navigationController presentViewController:v animated:YES completion:nil];
@@ -105,7 +83,7 @@
     }];
     // 4.sb push
     [[JLRoutes globalRoutes] addRoute:TJStoryBoardPushRoute handler:^BOOL(NSDictionary<NSString *,id> * _Nonnull parameters) {
-        UIViewController *currentVc = [self currentViewController];
+        UIViewController *currentVc = [self.window.rootViewController tj_topViewController];
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:parameters[@"sbname"] bundle:nil];
         UIViewController *v  = [storyboard instantiateViewControllerWithIdentifier:parameters[@"bundleid"]];
         [self paramToVc:v param:parameters];

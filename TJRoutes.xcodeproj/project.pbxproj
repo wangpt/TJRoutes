@@ -22,7 +22,6 @@
 		2BE57E832137B86D00C9FB0C /* TJTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE57E822137B86D00C9FB0C /* TJTabBarController.m */; };
 		2BE57E952137CA7A00C9FB0C /* UITableView+XQUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE57E942137CA7A00C9FB0C /* UITableView+XQUI.m */; };
 		2BED156921568A4400504A8A /* UIViewController+TJHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BED156821568A4400504A8A /* UIViewController+TJHelper.m */; };
-		2BED156C21568D9D00504A8A /* UIWindow+TJHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BED156B21568D9D00504A8A /* UIWindow+TJHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,8 +52,6 @@
 		2BE57E942137CA7A00C9FB0C /* UITableView+XQUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+XQUI.m"; sourceTree = "<group>"; };
 		2BED156721568A4400504A8A /* UIViewController+TJHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+TJHelper.h"; sourceTree = "<group>"; };
 		2BED156821568A4400504A8A /* UIViewController+TJHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+TJHelper.m"; sourceTree = "<group>"; };
-		2BED156A21568D9D00504A8A /* UIWindow+TJHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIWindow+TJHelper.h"; sourceTree = "<group>"; };
-		2BED156B21568D9D00504A8A /* UIWindow+TJHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+TJHelper.m"; sourceTree = "<group>"; };
 		31EAFA9BF1DD531DFF882FEF /* libPods-TJRoutes.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TJRoutes.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84CAD6616FE948C477FFFCD0 /* Pods-TJRoutes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TJRoutes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TJRoutes/Pods-TJRoutes.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,8 +130,6 @@
 				2B0A697A213696830045C1AB /* TJRouterConstHeader.m */,
 				2BED156721568A4400504A8A /* UIViewController+TJHelper.h */,
 				2BED156821568A4400504A8A /* UIViewController+TJHelper.m */,
-				2BED156A21568D9D00504A8A /* UIWindow+TJHelper.h */,
-				2BED156B21568D9D00504A8A /* UIWindow+TJHelper.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -258,7 +253,6 @@
 				2B1E1428213975B200D07552 /* TJSourceController.m in Sources */,
 				2BE57E7F213787B900C9FB0C /* TJNavigationController.m in Sources */,
 				2BED156921568A4400504A8A /* UIViewController+TJHelper.m in Sources */,
-				2BED156C21568D9D00504A8A /* UIWindow+TJHelper.m in Sources */,
 				2BE57E952137CA7A00C9FB0C /* UITableView+XQUI.m in Sources */,
 				2B0A697B213696830045C1AB /* TJRouterConstHeader.m in Sources */,
 			);

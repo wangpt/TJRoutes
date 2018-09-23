@@ -24,8 +24,16 @@
     } else if ([vc isKindOfClass:[UITabBarController class]]) {
         return [self _topViewController:[(UITabBarController *)vc selectedViewController]];
     } else {
-        return vc;
+        if ([self tj_isVisible]) {
+            return vc;
+        }else{
+            return nil;
+        }
     }
     return nil;
+}
+
+- (BOOL)tj_isVisible {
+    return [self isViewLoaded] && self.view.window;
 }
 @end
