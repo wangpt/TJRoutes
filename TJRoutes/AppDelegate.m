@@ -18,25 +18,6 @@
 @end
 
 @implementation AppDelegate
-
-
-- (void)remoteNotificationDictionary:(NSDictionary *)dict {
-    // 根据字典字段反射出我们想要的类，并初始化控制器
-    Class class = NSClassFromString(dict[@"className"]);
-    UIViewController *vc = [[class alloc] init];
-    // 获取参数列表，使用枚举的方式，对控制器属性进行KVC赋值
-    NSDictionary *parameter = dict[@"propertys"];
-    [parameter enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-        // 在属性赋值时，做容错处理，防止因为后台数据导致的异常
-        if ([vc respondsToSelector:NSSelectorFromString(key)]) {
-            [vc setValue:obj forKey:key];
-        }
-    }];
-}
-
-
-
-
 #pragma mark - URL拦截
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options{
     NSString *str = url.absoluteString;
